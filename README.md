@@ -1,2 +1,2 @@
-# Stream Practice
-Java Stream API 연습 레포지토리
+# Stream Lambda Practice
+Java Stream API + Lambda 연습 레포지토리
