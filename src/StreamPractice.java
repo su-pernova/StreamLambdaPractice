@@ -97,11 +97,19 @@ public class StreamPractice {
         System.out.println("\n< count >"); // stringList 의 모든 요소를 순회한다.
         stringList.stream().filter(StreamPractice::circuitTest).count();
         System.out.println("- - - - - - - - - - -");
-        System.out.println("< anyMatch >"); // stringList 의 요소 중 조건을 만족하는 요소를 만나면 순회를 중단한다.
+        System.out.println("< anyMatch1 >"); // stringList 의 요소 중 조건을 만족하는 요소를 만나면 순회를 중단한다.
         stringList.stream().anyMatch(StreamPractice::circuitTest);
+        System.out.println("- - - - - - - - - - -");
+        System.out.println("< anyMatch2 >"); // filter 와 함께 쓰여도 마찬가지
+        duplicateList.stream().filter(i -> i < 2).anyMatch(StreamPractice::circuitTest);
     }
 
     static boolean circuitTest(String a) {
+        System.out.println("executed");
+        return true;
+    }
+
+    static boolean circuitTest(int a) {
         System.out.println("executed");
         return true;
     }
