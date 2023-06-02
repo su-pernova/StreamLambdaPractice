@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 public class StreamIntermediate {
 
     public static void main(String[] args) {
-
         List<String> stringList = List.of("B", "D", "C", "A");
         List<Person> personList = List.of(
                 new Person("Ten", 10),
@@ -94,16 +93,6 @@ public class StreamIntermediate {
         System.out.println("\n< Stream peek >");
         System.out.println(peekStringList1);
         System.out.println(peekStringList2);
-
-        // Stream anyMatch : true 가 되는 조건을 만나면 즉시 break 됨 (사용시 주의할 것)
-        System.out.println("\n< count >"); // stringList 의 모든 요소를 순회한다.
-        stringList.stream().filter(StreamIntermediate::circuitTest).count();
-        System.out.println("- - - - - - - - - - -");
-        System.out.println("< anyMatch1 >"); // stringList 의 요소 중 조건을 만족하는 요소를 만나면 순회를 중단한다.
-        stringList.stream().anyMatch(StreamIntermediate::circuitTest);
-        System.out.println("- - - - - - - - - - -");
-        System.out.println("< anyMatch2 >"); // filter 와 함께 쓰여도 마찬가지
-        duplicateList.stream().filter(i -> i < 2).anyMatch(StreamIntermediate::circuitTest);
 
         // Stream boxed
         List<Integer> boxedList = Arrays.stream(primitiveIntList)
