@@ -33,7 +33,7 @@ public class StreamIntermediate {
         // Stream map : 스트림 내부 요소들을 새로운 형태에 매핑
             // person class 의 name 필드만 모아 List 생성
         List<String> nameList = personList.stream()
-                .map(person -> person.getName())
+                .map(Person::getName)
                 .collect(Collectors.toList());
         System.out.println("\n< Stream map >");
         System.out.println(nameList);
@@ -42,13 +42,13 @@ public class StreamIntermediate {
         List<String> filteredNameList = personList.stream()
                 .filter(person -> person.getAge() < 30)
                 // Person::getName
-                .map(person -> person.getName())
+                .map(Person::getName)
                 .collect(Collectors.toList());
         System.out.println(filteredNameList);
 
             // person class 의 age 필드만 모아 Long List 생성
         List<Long> longAgeList = personList.stream()
-                .mapToLong(person -> person.getAge())
+                .mapToLong(Person::getAge)
                 .boxed()
                 .collect(Collectors.toList());
         System.out.println(longAgeList);
@@ -56,7 +56,7 @@ public class StreamIntermediate {
         // Stream flatmap : 2차원 배열, 리스트 같은 요소를 단일 스트림으로 변환
         List<String> flatmapList = personList.stream()
                 .map(person -> person.getName().split(""))
-                .flatMap(splitList -> Arrays.stream(splitList)) // splitList 내부 요소를 다시 stream 으로 변환
+                .flatMap(Arrays::stream) // splitList 내부 요소를 다시 stream 으로 변환
                 .collect(Collectors.toList());
         System.out.println("\n< Stream flatmap >");
         System.out.println(flatmapList);
@@ -88,7 +88,7 @@ public class StreamIntermediate {
         List<String> peekStringList1 = new ArrayList<>();
         List<String> peekStringList2 = stringList.stream()
                 .map(string -> string + "1")
-                .peek(string -> peekStringList1.add(string))
+                .peek(peekStringList1::add)
                 .map(string -> string + "2")
                 .collect(Collectors.toList());
         System.out.println("\n< Stream peek >");
@@ -121,6 +121,19 @@ public class StreamIntermediate {
     static boolean circuitTest(int a) {
         System.out.println("executed");
         return true;
+    }
+
+    public static class Person {
+        private final String name;
+        private final int age;
+
+        Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        String getName() { return this.name; }
+        int getAge() { return this.age; }
     }
 
 }
