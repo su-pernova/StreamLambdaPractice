@@ -102,14 +102,4 @@ public class StreamIntermediate {
         System.out.println(boxedList);
     }
 
-    static boolean circuitTest(String a) {
-        System.out.println("executed");
-        return true;
-    }
-
-    static boolean circuitTest(int a) {
-        System.out.println("executed");
-        return true;
-    }
-
 }

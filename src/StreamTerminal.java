@@ -60,7 +60,7 @@ public class StreamTerminal {
         int result1 = personList.stream()
                 .map(Person::getAge)
                 .filter(age -> age >20)
-                .reduce((a, b) -> Integer.sum(a, b)).get();
+                .reduce(Integer::sum).get();
         System.out.println("\n< Stream reduce >");
         System.out.println(result1);
 
@@ -69,7 +69,7 @@ public class StreamTerminal {
         int result2 = personList.stream()
                 .map(Person::getAge)
                 .filter(age -> age >20)
-                .reduce(10, (a, b) -> Integer.sum(a, b));
+                .reduce(10, Integer::sum);
         System.out.println(result2);
 
             // A, B, C, D -> A!B, C, D -> A!B!C, D -> A!B!C!D
@@ -93,13 +93,13 @@ public class StreamTerminal {
             // Stream anyMatch : true 가 되는 조건을 만나면 즉시 break 됨 (사용시 주의할 것)
         System.out.println("- - - - - - - - - - -");
         System.out.println("[count]"); // stringList 의 모든 요소를 순회한다.
-        stringList.stream().filter(StreamIntermediate::circuitTest).count();
+        stringList.stream().filter(StreamTerminal::circuitTest).count();
         System.out.println("- - - - - - - - - - -");
         System.out.println("[anyMatch]"); // stringList 의 요소 중 조건을 만족하는 요소를 만나면 순회를 중단한다.
-        stringList.stream().anyMatch(StreamIntermediate::circuitTest);
+        stringList.stream().anyMatch(StreamTerminal::circuitTest);
         System.out.println("- - - - - - - - - - -");
         System.out.println("[filter + anyMatch]"); // filter 와 함께 쓰여도 마찬가지
-        duplicateList.stream().filter(i -> i < 2).anyMatch(StreamIntermediate::circuitTest);
+        duplicateList.stream().filter(i -> i < 2).anyMatch(StreamTerminal::circuitTest);
 
         // Stream collect
             // Collectors.toList(), toMap(), toSet() : 스트림 연산 결과를 List, Map, Set 으로 변환
@@ -123,6 +123,16 @@ public class StreamTerminal {
         personList.stream()
                 .filter(person -> person.getAge() > 30)
                 .forEach(person -> System.out.println(person.getName()));
+    }
+
+    static boolean circuitTest(String a) {
+        System.out.println("executed" + a);
+        return true;
+    }
+
+    static boolean circuitTest(int a) {
+        System.out.println("executed" + a);
+        return true;
     }
 
 }

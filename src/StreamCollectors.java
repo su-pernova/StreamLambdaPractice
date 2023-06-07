@@ -30,7 +30,7 @@ public class StreamCollectors {
 
         // Collectors.summingInt
         Integer summingIntSum = personList.stream().collect(Collectors.summingInt(Person::getAge));
-        Integer mapToIntSum = personList.stream().mapToInt(Person::getAge).sum();
+        int mapToIntSum = personList.stream().mapToInt(Person::getAge).sum();
         System.out.println("\n< Collectors.summingInt >");
         System.out.println(summingIntSum);
         System.out.println("(mapToIntSum : " + mapToIntSum + ")");
